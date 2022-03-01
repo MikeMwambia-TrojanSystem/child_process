@@ -1,0 +1,40 @@
+The child_process module enables us to spawn a process the same as the parent process 
+The parent proces is the process that is running and incharge of the child processes 
+This module has methods that enable them to spawn a process some way or another
+These methods include : - 
+-exec and execSync
+-spawn and spwanSync
+-execFile and execFileSync
+-fork
+
+execFile --- This method will excecute a file directly in shell 
+
+execFileSync --- This method will excecute a file directly on terminal but in a syncronous manner
+
+fork --- This method basically just spawns a new process from the currently executing javascript file 
+though a different file can be supplied.It also sets up inter process communication with the 
+subprocess by default.
+
+Node Js child_process module allows creation of child processes with the current process as the parent.
+A child process can be any excecutable written in any language
+
+The fork method is a specialization of the spawn method by default it starts a new process from the currently 
+excecuting file which can be javascript or any other and sets up Interprocess Communication(IPC) with the subprocess by default.
+
+spawn and spwanSync take the path to an executable as first arguments 
+and and an array of flags that should be passed to the command as second argument.
+spawn and spwanSync returns an object containing information about the process that was spawned 
+Unlike execSync the spwanSync method does not need to be wrapped in a try/catch.
+If a spwanSync process exits with a non-zero exit code,it does not throw 
+
+The spawn method and the exec method both returning a ChildProcess instance can be misleading. 
+There is one highly important differentiator between spawn and the other three methods we've been exploring (namely exec, 
+execSync and spawnSync): the spawn method is the only method of the four that doesn't buffer child process output. 
+Even though the exec method has stdout and stderr streams, 
+they will stop streaming once the subprocess output has reached 1 mebibyte (or 1024 * 1024 bytes). 
+This can be configured with a maxBuffer option, but no matter what, 
+the other three methods have an upper limit on the amount of output a child process can generate before it is truncated. 
+Since the spawn method does not buffer at all, it will continue to stream output for the entire lifetime of the subprocess, 
+no matter how much output it generates. 
+Therefore, for long running child processes it's recommended to use the spawn method.
+
